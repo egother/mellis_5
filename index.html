@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cumple Venu & Otto</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div id="app-container">
+
+        <section class="screen-selection">
+
+            <div class="title-overlay">
+                <h1 class="pixel-text" id="main-title">ELIGE TU MELLI</h1>
+            </div>
+
+            <div class="card" id="card-otto" onclick="handleCardClick('card-otto', 'OTTO')"></div>
+
+            <div class="card" id="card-venu" onclick="handleCardClick('card-venu', 'VENU')"></div>
+
+        </section>
+
+        <section class="screen-party" id="section-party">
+
+            <div class="party-visual"></div>
+
+            <div class="party-info-container">
+
+                <h2 class="info-title">¡FIESTA INVOCADA!</h2>
+
+                <div class="info-grid">
+                    <div class="info-row">
+                        <span class="icon">📅</span>
+                        <span class="data">Domingo 22 de Febrero</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="icon">⏰</span>
+                        <span class="data">De 14:00 a 18:00 hs</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="icon">📍</span>
+                        <span class="data"><a href="https://maps.app.goo.gl/SkGyzGuZXqf9pjEw6" style="color: white;"
+                                target="_blank">Calle Brasil 2865, Ezpeleta Oeste</a></span>
+                    </div>
+                </div>
+
+
+
+                <div class="pool-alert">
+                    🌊 ¡Traigan malla y toalla! 🌊
+                </div>
+
+                <div class="scroll-up-mini" onclick="window.scrollTo({top:0, behavior:'smooth'})">⬆</div>
+            </div>
+
+        </section>
+
+    </div>
+
+    <script>
+        let currentSelection = null;
+
+        function handleCardClick(cardId, name) {
+            const otto = document.getElementById('card-otto');
+            const venu = document.getElementById('card-venu');
+            const title = document.getElementById('main-title');
+            const partySection = document.getElementById('section-party');
+
+            // 1. Confirmación (Si tocan de nuevo al mismo)
+            if (currentSelection === cardId) {
+                partySection.scrollIntoView({ behavior: 'smooth' });
+                return;
+            }
+
+            // 2. Selección Inicial
+            currentSelection = cardId;
+
+            // Texto dinámico
+            // Usamos colores inline para asegurar que se note de quién hablamos
+            const color = name === 'OTTO' ? '#ff9900' : '#d600ff';
+            title.innerHTML = `CONFIRMAR A <span style="color:${color}">${name}</span>`;
+
+            // Reiniciar animación del título
+            title.style.animation = "none";
+            title.offsetHeight; /* Trigger reflow */
+            title.style.animation = "blink 0.3s infinite step-end";
+
+            // Resetear clases
+            otto.className = 'card';
+            venu.className = 'card';
+
+            // Aplicar estados
+            if (cardId === 'card-otto') {
+                otto.classList.add('active', 'active-mode');
+                venu.classList.add('dimmed');
+            } else {
+                venu.classList.add('active', 'active-mode');
+                otto.classList.add('dimmed');
+            }
+        }
+    </script>
+</body>
+
+</html>
