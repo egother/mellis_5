@@ -267,7 +267,7 @@ body::after {
     padding: 10px;
     border-radius: 10px;
     font-weight: bold;
-    font-size: 0.9rem;
+    font-size: 1.2rem;
     border: 1px dashed rgba(255, 255, 255, 0.5);
 }
 
