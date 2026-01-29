@@ -39,13 +39,59 @@ body::after {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: #000;
     z-index: 9999;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     transition: opacity 0.5s ease-out;
+
+    /* Fondo Retro Console (Grid + Synthwave) */
+    background:
+        linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06)),
+        linear-gradient(transparent 65%, #2a2a2a 100%),
+        #111;
+    background-size: 100% 2px, 3px 100%, 100%;
+    overflow: hidden;
+    perspective: 500px; /* Para el efecto 3D */
+}
+
+/* Rejilla de piso 3D en movimiento */
+#loading-screen::before {
+    content: "";
+    position: absolute;
+    bottom: -30%;
+    left: -50%;
+    width: 200%;
+    height: 100%;
+    background-image:
+        linear-gradient(90deg, rgba(255, 0, 255, 0.3) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(255, 0, 255, 0.3) 1px, transparent 1px);
+    background-size: 40px 40px;
+    transform: rotateX(60deg);
+    animation: grid-scroll 1.5s linear infinite;
+    z-index: -1;
+    mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 80%);
+    -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 80%);
+}
+
+@keyframes grid-scroll {
+    0% { transform: rotateX(60deg) translateY(0); }
+    100% { transform: rotateX(60deg) translateY(40px); }
+}
+
+/* Efecto de viñeta (bordes oscuros) */
+#loading-screen::after {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: radial-gradient(circle, rgba(0,0,0,0) 50%, rgba(0,0,0,0.9) 100%);
+    z-index: -1;
 }
 
 #loading-screen.fade-out {
@@ -59,6 +105,7 @@ body::after {
     /* Efecto Glitch simple */
     animation: blink 0.5s infinite step-end;
     margin-bottom: 20px;
+    text-shadow: 2px 2px 0 #d600ff, -2px -2px 0 #ff9900;
 }
 
 /* Barra de progreso Pixel Art */
@@ -70,6 +117,7 @@ body::after {
     padding: 4px;
     position: relative;
     box-shadow: 4px 4px 0 #333;
+    background-color: #000;
 }
 
 .loading-bar {
