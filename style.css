@@ -304,95 +304,121 @@ body::after {
 
 /* 2. ÁREA DE INFORMACIÓN */
 .party-info-container {
-    background: linear-gradient(135deg, #ff6d00 0%, #d500f9 100%);
+    /* Fondo oscuro para contraste */
+    background: #111;
+    border-top: 4px solid #fff;
     width: 100%;
-    padding: 25px 30px 40px 30px;
-    border-radius: 30px 30px 0 0;
-    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 20px 20px 0 0;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.8);
     z-index: 10;
     text-align: center;
     position: relative;
     box-sizing: border-box;
 }
 
-/* Textos */
-.info-title {
+/* Título Pixelado Secundario */
+.pixel-subtitle {
+    font-size: 2rem;
     color: #fff;
-    margin: 0;
-    font-size: 1.8rem;
+    margin: 0 0 15px 0;
     font-weight: 900;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+    text-shadow: 3px 3px 0 #000, -2px -2px 0 #d600ff; /* Sombra dura retro */
+    font-family: 'Arial', sans-serif; /* Idealmente una pixel font */
 }
 
-.info-subtitle {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 0.9rem;
-    margin-top: 5px;
-    margin-bottom: 20px;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-/* Grid de Datos */
-.info-grid {
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 15px;
-    padding: 15px;
+/* CAJA ESTILO RPG */
+.rpg-box {
+    background: #222;
+    border: 4px solid #fff;
+    box-shadow: 6px 6px 0 rgba(0,0,0,0.5);
+    padding: 10px;
     margin-bottom: 20px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
 }
 
-.info-row {
+.row-split {
     display: flex;
+    gap: 10px;
+}
+
+.rpg-item {
+    background: #333;
+    flex: 1;
+    padding: 8px;
+    border: 2px solid #555;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 15px;
-    color: white;
-    font-size: 1rem;
-    text-align: left;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    justify-content: center;
+    transition: transform 0.2s, background 0.2s;
 }
 
-.icon {
-    font-size: 1.4rem;
-}
-
-.data {
-    font-weight: 700;
-}
-
-/* Botones */
-.btn-map {
-    display: block;
+.rpg-item.full-width {
     width: 100%;
-    padding: 14px 0;
-    background: white;
-    color: #d500f9;
-    font-weight: 900;
-    text-decoration: none;
-    border-radius: 50px;
+    box-sizing: border-box;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 15px;
+}
+
+.rpg-item:active {
+    transform: scale(0.98);
+    background: #444;
+}
+
+.rpg-label {
+    font-size: 0.7rem;
+    color: #aaa;
     text-transform: uppercase;
     letter-spacing: 1px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    margin-bottom: 20px;
-    transition: transform 0.2s;
-}
-
-.btn-map:active {
-    transform: scale(0.95);
-}
-
-.pool-alert {
-    background: rgba(0, 0, 0, 0.2);
-    color: #fff;
-    padding: 10px;
-    border-radius: 10px;
+    margin-bottom: 4px;
     font-weight: bold;
-    font-size: 1.2rem;
-    border: 1px dashed rgba(255, 255, 255, 0.5);
+}
+
+.rpg-value {
+    font-size: 1.1rem;
+    font-weight: 900;
+    color: #fff;
+    text-shadow: 1px 1px 0 #000;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.map-link {
+    color: #ff9900; /* Color Otto */
+    text-decoration: none;
+    border-bottom: 2px dashed #ff9900;
+    transition: all 0.2s;
+}
+
+.map-link:hover {
+    background-color: #ff9900;
+    color: #000;
+}
+
+/* ALERTA RETRO (WATER LEVEL) */
+.retro-alert {
+    background: #00bcd4; /* Azul agua */
+    color: #000;
+    padding: 10px;
+    border: 4px solid #fff;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    box-shadow: 4px 4px 0 #000;
+    animation: water-pulse 1.5s infinite;
+}
+
+@keyframes water-pulse {
+    0% { transform: scale(1); box-shadow: 4px 4px 0 #000; }
+    50% { transform: scale(1.02); box-shadow: 6px 6px 0 #000; background: #26c6da; }
+    100% { transform: scale(1); box-shadow: 4px 4px 0 #000; }
 }
 
 .scroll-up-mini {

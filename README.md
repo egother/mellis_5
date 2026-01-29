@@ -1,101 +1,35 @@
-# 🎂 Invitación Interactiva: Venu & Otto
+# Cumple Venu & Otto - 5to Aniversario 🎂🎮
 
-![Status](https://img.shields.io/badge/Status-Terminado-success)
-![Technology](https://img.shields.io/badge/Tech-HTML5_%7C_CSS3_%7C_JS-blue)
-![Mobile](https://img.shields.io/badge/Design-Mobile_First-orange)
-
-Una experiencia web interactiva diseñada como invitación de cumpleaños doble. El sitio presenta una interfaz estilo "Selección de Personaje" de videojuego, permitiendo a los invitados elegir su "Team" antes de revelar los detalles del evento.
-
----
+¡Bienvenidos al repositorio de la invitación interactiva para el 5to cumpleaños de los Mellis! Esta no es una invitación común, es una experiencia **Retro Gaming** creada para sorprender a los invitados.
 
 ## ✨ Características Principales
 
-### 📱 Diseño Adaptativo (Responsive & Orientation Aware)
-*   **Modo Vertical (Móvil):** Diseño optimizado para smartphones. Los personajes se presentan apilados verticalmente para maximizar el espacio en pantalla.
-*   **Modo Horizontal (Escritorio/Tablet):** Al girar el dispositivo o entrar desde una PC, el diseño se transforma automáticamente (`CSS Grid/Flexbox`) mostrando a los personajes lado a lado y la información en un panel dividido.
-*   **Smart Viewport Height:** Implementación de la unidad `100svh` para garantizar que la interfaz se vea perfecta en móviles, evitando que la barra de navegación del navegador oculte contenido vital.
-
-### 🎮 Interactividad y UX
-*   **Selección de Personaje:** Lógica en JavaScript para resaltar la selección del usuario, atenuar al personaje no seleccionado y cambiar dinámicamente el título.
-*   **Animaciones Suaves:** Transiciones CSS para efectos de "hover", selección activa y desplazamiento (Smooth Scrolling).
-*   **Feedback Visual:** Bordes iluminados, cambios de opacidad y sombras de colores temáticos (Naranja para Otto, Violeta para Venu).
-
----
+- **Selección de Personaje:** Un sistema dinámico donde los invitados eligen entre Otto o Venu.
+- **Sprites Animados:** Los personajes en la pantalla de selección cuentan con animaciones "idle" en bucle (estilo boomerang 1-2-3-4-5-6-5-4-3-2) usando imágenes `.webp` livianas.
+- **Loading Screen Retro:** Pantalla de carga de 3 segundos con estética de consola antigua, fondo de rejilla (grid) 3D animado y barra de progreso pixel art.
+- **Quest Info (RPG Style):** La información de la fiesta se presenta como una misión (Quest) con contenedores estilo RPG y alertas visuales dinámicas.
+- **Diseño Responsive:** Optimizado para dispositivos móviles y visualización en modo horizontal (landscape).
 
 ## 🛠️ Tecnologías Utilizadas
 
-El proyecto fue construido utilizando estándares web modernos sin dependencias externas pesadas, asegurando una carga instantánea.
-
-*   **HTML5:** Estructura semántica.
-*   **CSS3:**
-    *   Variables CSS (`:root`) para gestión de colores.
-    *   Flexbox para la maquetación.
-    *   Media Queries para la orientación `landscape`.
-    *   Animaciones `keyframes` (efecto parpadeo estilo arcade).
-*   **JavaScript (Vanilla):** Manejo del DOM y eventos de usuario sin frameworks.
-
----
+- **HTML5:** Estructura semántica.
+- **CSS3:** Animaciones complejas, efectos de profundidad (perspective), gradientes y diseño adaptativo.
+- **Vanilla JavaScript:** Lógica de selección de personajes, control de la pantalla de carga y gestión de estados visuales.
 
 ## 📂 Estructura del Proyecto
 
 ```text
-cumple5/
-│
-├── index.html          # Estructura principal y lógica JS embebida
-├── style.css           # Estilos, animaciones y media queries
-├── README.md           # Documentación del proyecto
-│
-├── [Assets Gráficos]
-│   ├── otto_normal.png   # Estado inactivo
-│   ├── otto_active.png   # Estado seleccionado
-│   ├── venu_normal.png   # Estado inactivo
-│   ├── venu_active.png   # Estado seleccionado
-│   ├── cumple_wide.png   # Banner
-│   └── fiesta_bg.png     # Fondo de la sección de info
-│
-└── originales/         # Respaldo de archivos fuente de diseño
+├── img/
+│   ├── otto_selection/    # Frames (1-6) para la animación de Otto
+│   ├── venu_selection/    # Frames (1-6) para la animación de Venu
+│   └── ...                # Assets generales (fondos, iconos)
+├── index.html             # Estructura y lógica principal
+├── style.css              # Estilos, animaciones y efectos retro
+└── favicon.ico            # Icono del sitio
 ```
 
----
-
-## 🚀 Instalación y Uso
-
-1.  **Clonar el repositorio:**
-    ```bash
-    git clone https://github.com/TU_USUARIO/cumple5.git
-    ```
-2.  **Ejecutar localmente:**
-    Simplemente abre el archivo `index.html` en tu navegador web favorito (Chrome, Firefox, Safari, Edge).
+## 🚀 Cómo visualizar
+Simplemente abre el archivo `index.html` en cualquier navegador moderno o visita el despliegue en GitHub Pages.
 
 ---
-
-## 🎨 Personalización
-
-Si deseas usar este template para tu propio evento:
-
-1.  **Textos:** Edita el `index.html` buscando las etiquetas `<h1>`, `<h2>` y los spans dentro de `.info-grid` para cambiar fecha, hora y dirección.
-2.  **Imágenes:** Reemplaza los archivos `.png` en la raíz manteniendo los nombres originales, o actualiza las referencias en `style.css`.
-3.  **Colores:** Abre `style.css` y modifica las variables en `:root`:
-    ```css
-    :root {
-        --color-otto: #ff9900; /* Tu color principal 1 */
-        --color-venu: #d600ff; /* Tu color principal 2 */
-    }
-    ```
-
----
-
-## 👥 Créditos y Autoría
-
-Este proyecto es el resultado de una colaboración entre inteligencia humana e inteligencia artificial.
-
-*   **Concepto, Diseño y Dirección:** [TU NOMBRE AQUÍ]
-*   **Co-Piloto de Desarrollo:** Gemini AI (Google)
-
-> *"El código es poesía, y los cumpleaños son la excusa perfecta para escribirla."*
-
----
-
-## 📄 Licencia
-
-Este proyecto está bajo la licencia [MIT](https://opensource.org/licenses/MIT) - siéntete libre de usarlo y modificarlo para tus propios eventos.
+*Creado con ❤️ para Venu & Otto.*
