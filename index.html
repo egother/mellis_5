@@ -103,27 +103,8 @@
 
     <script>
         function addToCalendar() {
-            const event = [
-                'BEGIN:VCALENDAR',
-                'VERSION:2.0',
-                'BEGIN:VEVENT',
-                'DTSTART:20260222T140000',
-                'DTEND:20260222T180000',
-                'SUMMARY:Cumple Venu & Otto',
-                'DESCRIPTION:¡Fiesta de Cumpleaños! No te olvides de traer malla.',
-                'LOCATION:Calle Brasil 2865, Ezpeleta',
-                'END:VEVENT',
-                'END:VCALENDAR'
-            ].join('\n');
-
-            const blob = new Blob([event], { type: 'text/calendar;charset=utf-8' });
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.setAttribute('download', 'cumple_venu_otto.ics');
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+            const url = "https://calendar.google.com/calendar/render?action=TEMPLATE&text=Cumple+Venu+%26+Otto+(5+Años)&dates=20260222T140000/20260222T180000&details=%C2%A1Traigan+malla+y+toalla!&location=Calle+Brasil+2865&ctz=America/Argentina/Buenos_Aires";
+            window.open(url, '_blank');
         }
 
         window.onload = function() {
