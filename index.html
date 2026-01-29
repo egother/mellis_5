@@ -74,7 +74,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="rpg-item full-width">
                         <span class="rpg-label">UBICACIÓN (Tap para ver)</span>
                         <div class="rpg-value">
@@ -89,7 +89,7 @@
                     <div class="retro-alert" style="flex: 1; margin-bottom: 0; animation: water-pulse 1.5s infinite;">
                         <span class="alert-icon">🌊</span> ¡TRAER MALLA! <span class="alert-icon">🌊</span>
                     </div>
-                    <button class="retro-btn" onclick="addToCalendar()" aria-label="Agendar evento">
+                    <button class="retro-btn" onclick="agendarInteligente(event)" aria-label="Agendar evento">
                         <span style="margin-right: 5px;">📅</span> AGENDALO!
                     </button>
                 </div>
@@ -102,21 +102,66 @@
     </div>
 
     <script>
-        function addToCalendar() {
-            const url = "https://calendar.google.com/calendar/render?action=TEMPLATE&text=Cumple+Venu+%26+Otto+(5+Años)&dates=20260222T140000/20260222T180000&details=%C2%A1Traigan+malla+y+toalla!&location=Calle+Brasil+2865&ctz=America/Argentina/Buenos_Aires";
-            window.open(url, '_blank');
+        function agendarInteligente(e) {
+            e.preventDefault();
+
+            // 1. Detectar si es dispositivo móvil (Android, iPhone, iPad, etc.)
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+            // DATOS DEL EVENTO (22 Feb 2026, 14:00 a 18:00)
+            const titulo = "Cumple Venu & Otto (5 Años)";
+            const descripcion = "¡Traigan malla y toalla! Los esperamos.";
+            const ubicacion = "Calle Brasil 2865";
+            const fechaInicio = "20260222T140000";
+            const fechaFin = "20260222T180000";
+
+            if (isMobile) {
+                // === ESTRATEGIA MÓVIL: ARCHIVO ICS (Abre la App Nativa) ===
+
+                const event = [
+                    "BEGIN:VCALENDAR",
+                    "VERSION:2.0",
+                    "BEGIN:VEVENT",
+                    "URL:" + document.URL,
+                    "DTSTART:" + fechaInicio,
+                    "DTEND:" + fechaFin,
+                    "SUMMARY:" + titulo,
+                    "DESCRIPTION:" + descripcion,
+                    "LOCATION:" + ubicacion,
+                    "END:VEVENT",
+                    "END:VCALENDAR"
+                ].join("\n");
+
+                const blob = new Blob([event], { type: 'text/calendar;charset=utf-8' });
+
+                // Truco para iOS: A veces necesita que se abra en una ventana nueva para detectar el tipo de archivo
+                // Pero el método de descarga directa suele funcionar mejor en versiones modernas.
+                const link = document.createElement('a');
+                link.href = window.URL.createObjectURL(blob);
+                link.setAttribute('download', 'cumple_mellis.ics');
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+
+            } else {
+                // === ESTRATEGIA PC: GOOGLE CALENDAR WEB (Pestaña nueva) ===
+
+                const googleUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(titulo)}&dates=${fechaInicio}/${fechaFin}&details=${encodeURIComponent(descripcion)}&location=${encodeURIComponent(ubicacion)}&ctz=America/Argentina/Buenos_Aires`;
+
+                window.open(googleUrl, '_blank');
+            }
         }
 
-        window.onload = function() {
+        window.onload = function () {
             const loader = document.getElementById('loading-screen');
             const progressBar = document.getElementById('progress-bar');
-            
+
             let width = 0;
             // Duración total objetivo: 3000ms (3 segundos)
             // Intervalo de actualización: 30ms (para que sea fluido)
             // Pasos totales: 3000 / 30 = 100 pasos
             // Incremento por paso: 1%
-            
+
             const interval = setInterval(() => {
                 if (width >= 100) {
                     clearInterval(interval);
@@ -125,13 +170,13 @@
                         loader.classList.add('fade-out');
                         setTimeout(() => {
                             loader.style.display = 'none';
-                        }, 500); 
+                        }, 500);
                     }, 200);
                 } else {
-                    width++; 
+                    width++;
                     progressBar.style.width = width + '%';
                 }
-            }, 30); 
+            }, 30);
         };
 
         let currentSelection = null;
