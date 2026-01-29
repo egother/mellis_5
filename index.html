@@ -29,6 +29,14 @@
 
 <body>
 
+    <!-- PANTALLA DE CARGA -->
+    <div id="loading-screen">
+        <h1 class="pixel-text loading-text">LOADING...</h1>
+        <div class="loading-bar-container">
+            <div class="loading-bar" id="progress-bar"></div>
+        </div>
+    </div>
+
     <div id="app-container">
 
         <section class="screen-selection">
@@ -81,6 +89,33 @@
     </div>
 
     <script>
+        window.onload = function() {
+            const loader = document.getElementById('loading-screen');
+            const progressBar = document.getElementById('progress-bar');
+            
+            let width = 0;
+            // Duración total objetivo: 3000ms (3 segundos)
+            // Intervalo de actualización: 30ms (para que sea fluido)
+            // Pasos totales: 3000 / 30 = 100 pasos
+            // Incremento por paso: 1%
+            
+            const interval = setInterval(() => {
+                if (width >= 100) {
+                    clearInterval(interval);
+                    // Una vez completo, esperamos un poquito y desvanecemos
+                    setTimeout(() => {
+                        loader.classList.add('fade-out');
+                        setTimeout(() => {
+                            loader.style.display = 'none';
+                        }, 500); 
+                    }, 200);
+                } else {
+                    width++; 
+                    progressBar.style.width = width + '%';
+                }
+            }, 30); 
+        };
+
         let currentSelection = null;
 
         function handleCardClick(cardId, name) {

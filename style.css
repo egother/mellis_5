@@ -18,14 +18,65 @@ body {
     color: white;
 }
 
-/* Pre-carga de imágenes activas para evitar parpadeos */
+/* Pre-carga de imágenes activas y sprites para evitar parpadeos */
 body::after {
     position: absolute;
     width: 0;
     height: 0;
     overflow: hidden;
     z-index: -1;
-    content: url('otto_active.png') url('venu_active.png');
+    content: url('otto_active.png') url('venu_active.png')
+             url('img/otto_selection/1.webp') url('img/otto_selection/2.webp') url('img/otto_selection/3.webp')
+             url('img/otto_selection/4.webp') url('img/otto_selection/5.webp') url('img/otto_selection/6.webp')
+             url('img/venu_selection/1.webp') url('img/venu_selection/2.webp') url('img/venu_selection/3.webp')
+             url('img/venu_selection/4.webp') url('img/venu_selection/5.webp') url('img/venu_selection/6.webp');
+}
+
+/* --- LOADING SCREEN --- */
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease-out;
+}
+
+#loading-screen.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loading-text {
+    font-size: 3rem;
+    color: #fff;
+    /* Efecto Glitch simple */
+    animation: blink 0.5s infinite step-end;
+    margin-bottom: 20px;
+}
+
+/* Barra de progreso Pixel Art */
+.loading-bar-container {
+    width: 80%;
+    max-width: 300px;
+    height: 30px;
+    border: 4px solid #fff;
+    padding: 4px;
+    position: relative;
+    box-shadow: 4px 4px 0 #333;
+}
+
+.loading-bar {
+    width: 0%;
+    height: 100%;
+    background-color: #fff;
+    transition: width 0.1s linear;
 }
 
 /* --- CONTENEDOR PRINCIPAL --- */
@@ -82,6 +133,33 @@ body::after {
     }
 }
 
+/* --- ANIMACIONES DE SPRITES (BOOMERANG 1-2-3-4-5-6-5-4-3-2) --- */
+@keyframes otto-idle {
+    0%, 100% { background-image: url('img/otto_selection/1.webp'), radial-gradient(circle at bottom, #ffb74d 0%, #e65100 70%, #bf360c 100%); }
+    10% { background-image: url('img/otto_selection/2.webp'), radial-gradient(circle at bottom, #ffb74d 0%, #e65100 70%, #bf360c 100%); }
+    20% { background-image: url('img/otto_selection/3.webp'), radial-gradient(circle at bottom, #ffb74d 0%, #e65100 70%, #bf360c 100%); }
+    30% { background-image: url('img/otto_selection/4.webp'), radial-gradient(circle at bottom, #ffb74d 0%, #e65100 70%, #bf360c 100%); }
+    40% { background-image: url('img/otto_selection/5.webp'), radial-gradient(circle at bottom, #ffb74d 0%, #e65100 70%, #bf360c 100%); }
+    50% { background-image: url('img/otto_selection/6.webp'), radial-gradient(circle at bottom, #ffb74d 0%, #e65100 70%, #bf360c 100%); }
+    60% { background-image: url('img/otto_selection/5.webp'), radial-gradient(circle at bottom, #ffb74d 0%, #e65100 70%, #bf360c 100%); }
+    70% { background-image: url('img/otto_selection/4.webp'), radial-gradient(circle at bottom, #ffb74d 0%, #e65100 70%, #bf360c 100%); }
+    80% { background-image: url('img/otto_selection/3.webp'), radial-gradient(circle at bottom, #ffb74d 0%, #e65100 70%, #bf360c 100%); }
+    90% { background-image: url('img/otto_selection/2.webp'), radial-gradient(circle at bottom, #ffb74d 0%, #e65100 70%, #bf360c 100%); }
+}
+
+@keyframes venu-idle {
+    0%, 100% { background-image: url('img/venu_selection/1.webp'), linear-gradient(0deg, #4a148c 0%, #7b1fa2 60%, #aa00ff 100%); }
+    10% { background-image: url('img/venu_selection/2.webp'), linear-gradient(0deg, #4a148c 0%, #7b1fa2 60%, #aa00ff 100%); }
+    20% { background-image: url('img/venu_selection/3.webp'), linear-gradient(0deg, #4a148c 0%, #7b1fa2 60%, #aa00ff 100%); }
+    30% { background-image: url('img/venu_selection/4.webp'), linear-gradient(0deg, #4a148c 0%, #7b1fa2 60%, #aa00ff 100%); }
+    40% { background-image: url('img/venu_selection/5.webp'), linear-gradient(0deg, #4a148c 0%, #7b1fa2 60%, #aa00ff 100%); }
+    50% { background-image: url('img/venu_selection/6.webp'), linear-gradient(0deg, #4a148c 0%, #7b1fa2 60%, #aa00ff 100%); }
+    60% { background-image: url('img/venu_selection/5.webp'), linear-gradient(0deg, #4a148c 0%, #7b1fa2 60%, #aa00ff 100%); }
+    70% { background-image: url('img/venu_selection/4.webp'), linear-gradient(0deg, #4a148c 0%, #7b1fa2 60%, #aa00ff 100%); }
+    80% { background-image: url('img/venu_selection/3.webp'), linear-gradient(0deg, #4a148c 0%, #7b1fa2 60%, #aa00ff 100%); }
+    90% { background-image: url('img/venu_selection/2.webp'), linear-gradient(0deg, #4a148c 0%, #7b1fa2 60%, #aa00ff 100%); }
+}
+
 /* Tarjetas */
 .card {
     width: 100%;
@@ -98,13 +176,12 @@ body::after {
 
 /* --- OTTO (ARRIBA) --- */
 #card-otto {
-    background-image:
-        url('otto_normal.png'),
-        radial-gradient(circle at bottom, #ffb74d 0%, #e65100 70%, #bf360c 100%);
+    animation: otto-idle 1.2s infinite step-end;
     border-bottom: 2px solid #000;
 }
 
 #card-otto.active-mode {
+    animation: none;
     background-image:
         url('otto_active.png'),
         radial-gradient(circle at center, #ffe0b2 0%, #ff9800 60%, #e64a19 100%) !important;
@@ -113,14 +190,13 @@ body::after {
 
 /* --- VENU (ABAJO) --- */
 #card-venu {
-    background-image:
-        url('venu_normal.png'),
-        linear-gradient(0deg, #4a148c 0%, #7b1fa2 60%, #aa00ff 100%);
+    animation: venu-idle 1.2s infinite step-end;
     border-top: 2px solid #000;
     background-position: center top, center center;
 }
 
 #card-venu.active-mode {
+    animation: none;
     background-image:
         url('venu_active.png'),
         linear-gradient(0deg, #6a1b9a 0%, #8e24aa 50%, #ea80fc 100%) !important;
